@@ -1,9 +1,10 @@
 import axios from "axios";
 import React from "react";
 import { Container, Nav, Navbar, NavbarToggle } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const UserNavbar = () => {
+  const navigate = useNavigate();
   const handleLogout = async () => {
     try {
       const email = localStorage.getItem("email");
@@ -13,11 +14,12 @@ const UserNavbar = () => {
       );
       console.log(res);
       localStorage.removeItem("email");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
   };
-  
+
   return (
     <div>
       <style>
@@ -214,12 +216,11 @@ const UserNavbar = () => {
                 to="/user/userhome"
                 style={({ isActive }) => ({
                   borderBottom: isActive ? "2px solid #ffcc00" : null,
-                  color:isActive?"#ffcc00":null,
-                  textShadow:isActive?"0 0 10px #ffcc00":null,
-                  scale:isActive?"1.1":null,
+                  color: isActive ? "#ffcc00" : null,
+                  textShadow: isActive ? "0 0 10px #ffcc00" : null,
+                  scale: isActive ? "1.1" : null,
                 })}
                 className="nav-item navItemStyle"
-               
               >
                 Home
               </Nav.Link>
@@ -229,11 +230,10 @@ const UserNavbar = () => {
                 className="nav-item navItemStyle"
                 style={({ isActive }) => ({
                   borderBottom: isActive ? "2px solid #ffcc00" : null,
-                  color:isActive?"#ffcc00":null,
-                  textShadow:isActive?"0 0 10px #ffcc00":null,
-                  scale:isActive?"1.1":null,
+                  color: isActive ? "#ffcc00" : null,
+                  textShadow: isActive ? "0 0 10px #ffcc00" : null,
+                  scale: isActive ? "1.1" : null,
                 })}
-                
               >
                 New-Property
               </Nav.Link>
@@ -242,12 +242,11 @@ const UserNavbar = () => {
                 to="/user/uploadedProperties"
                 className="nav-item navItemStyle"
                 style={({ isActive }) => ({
-                    borderBottom: isActive ? "2px solid #ffcc00" : null,
-                    color:isActive?"#ffcc00":null,
-                    textShadow:isActive?"0 0 10px #ffcc00":null,
-                    scale:isActive?"1.1":null,
-                  })}
-                  
+                  borderBottom: isActive ? "2px solid #ffcc00" : null,
+                  color: isActive ? "#ffcc00" : null,
+                  textShadow: isActive ? "0 0 10px #ffcc00" : null,
+                  scale: isActive ? "1.1" : null,
+                })}
               >
                 Listed-Properties
               </Nav.Link>
@@ -258,27 +257,28 @@ const UserNavbar = () => {
                 to="/user/changepassword"
                 className="nav-item navItemStyle"
                 style={({ isActive }) => ({
-                    borderBottom: isActive ? "2px solid #ffcc00" : null,
-                    color:isActive?"#ffcc00":null,
-                    textShadow:isActive?"0 0 10px #ffcc00":null,
-                    scale:isActive?"1.1":null,
-                  })}
-                  
+                  borderBottom: isActive ? "2px solid #ffcc00" : null,
+                  color: isActive ? "#ffcc00" : null,
+                  textShadow: isActive ? "0 0 10px #ffcc00" : null,
+                  scale: isActive ? "1.1" : null,
+                })}
               >
                 change password
               </Nav.Link>
               <Nav.Link
-                as={NavLink}
-                to="/home"
+                as="button"
                 className="nav-item navItemStyle"
-                onClick={()=>{handleLogout();}}
-                style={({ isActive }) => ({
-                    color:isActive?"#ffcc00":null,
-                    borderBottom: isActive ? "2px solid #ffcc00" : null,
-                    textShadow:isActive?"0 0 10px #ffcc00":null,
-                    scale:isActive?"1.1":null,
-                  })}
-                  
+                onClick={() => {
+                  if (window.confirm("Do you want to logout?")) {
+                    handleLogout();
+                  }
+                }}
+                style={{
+                  color: "white",
+                  cursor: "pointer",
+                  background: "none",
+                  border: "none",
+                }}
               >
                 Log-out
               </Nav.Link>
