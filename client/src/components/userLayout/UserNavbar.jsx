@@ -17,8 +17,7 @@ const UserNavbar = () => {
       console.log(error);
     }
   };
-  const audio = new Audio("/NavbarSound3.mp3");
-  const playsound=()=>{audio.currentTime=0.2;audio.play();}
+  
   return (
     <div>
       <style>
@@ -220,7 +219,7 @@ const UserNavbar = () => {
                   scale:isActive?"1.1":null,
                 })}
                 className="nav-item navItemStyle"
-                onClick={playsound}
+               
               >
                 Home
               </Nav.Link>
@@ -234,7 +233,7 @@ const UserNavbar = () => {
                   textShadow:isActive?"0 0 10px #ffcc00":null,
                   scale:isActive?"1.1":null,
                 })}
-                onClick={playsound}
+                
               >
                 New-Property
               </Nav.Link>
@@ -248,7 +247,7 @@ const UserNavbar = () => {
                     textShadow:isActive?"0 0 10px #ffcc00":null,
                     scale:isActive?"1.1":null,
                   })}
-                  onClick={playsound}
+                  
               >
                 Listed-Properties
               </Nav.Link>
@@ -264,7 +263,7 @@ const UserNavbar = () => {
                     textShadow:isActive?"0 0 10px #ffcc00":null,
                     scale:isActive?"1.1":null,
                   })}
-                  onClick={playsound}
+                  
               >
                 change password
               </Nav.Link>
@@ -272,7 +271,7 @@ const UserNavbar = () => {
                 as={NavLink}
                 to="/home"
                 className="nav-item navItemStyle"
-                onClick={()=>{handleLogout();playsound();}}
+                onClick={()=>{handleLogout();}}
                 style={({ isActive }) => ({
                     color:isActive?"#ffcc00":null,
                     borderBottom: isActive ? "2px solid #ffcc00" : null,

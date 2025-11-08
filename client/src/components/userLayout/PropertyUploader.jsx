@@ -81,9 +81,7 @@ const PropertyUploader = () => {
       );
       if (result.status === 200) {
         setShowSuccess("property data uploaded successfully");
-          const audio = new Audio("/Success_Sound.mp3");
-          audio.currentTime=1;
-          audio.play();
+          
         setShowError("");
         setPropertyData({
           propertyType: "RentHome",

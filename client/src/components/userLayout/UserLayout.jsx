@@ -2,7 +2,6 @@ import React from 'react';
 import UserHeader from './UserHeader'; 
 import { Outlet } from 'react-router-dom'; 
 import UserFooter from './UserFooter';
-import CustomCursor from '../CustomStyles/CustomCursor';
 const UserLayout = () => { 
 return ( 
 <div style={{ display: 'flex', flexDirection: 'column', minHeight: 
@@ -17,7 +16,7 @@ return (
             <div style={{ flex: 1, paddingTop: '75px'
 }}> 
                 <Outlet /> 
-                <CustomCursor color="rgb(255, 48, 48)" index='-1' size='40vw'/>
+                
                  {/* <CustomCursor color="rgb(255, 255, 255)" index='1000' size='40px'/> */}
             </div> 
  

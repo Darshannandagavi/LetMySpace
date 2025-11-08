@@ -13,10 +13,10 @@ import contactRouter from "./routes/ContactRouter.js";
 import adminRouter from "./routes/AdminRouter.js";
 
 //connecting to mongoDB
+dotenv.config(); // loads environment variables from a .env file into process.env, allowing secure configuration management.
 const app = express(); //initializes an Express server.
 app.use(bodyParser.json()); //parses data to json data to send data to backend
 app.use(cors()); //allows web applications running on different origins (domains) to communicate with each other
-dotenv.config(); // loads environment variables from a .env file into process.env, allowing secure configuration management.
 const PORT = process.env.PORT || 7000;
 const URL = process.env.MONGOURL;
 mongoose

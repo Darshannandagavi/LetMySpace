@@ -1,14 +1,9 @@
 import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import {  NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 const AdminNavbar = () => {
-  const audio = new Audio("/NavbarSound3.mp3");
-  const playsound = () => {
-    audio.currentTime = 0.2;
-    audio.play();
-  };
-
+  const navigate=useNavigate();
   const handleLogout = async () => {
     const email = localStorage.getItem("email");
     if (email) {
@@ -16,6 +11,7 @@ const AdminNavbar = () => {
         `http://localhost:8000/user/logout/?email=${email}`
       );
       console.log(logout);
+      navigate('/')
       localStorage.removeItem("email");
     }
   };
@@ -214,7 +210,6 @@ const AdminNavbar = () => {
                 as={NavLink}
                 to="/admin/dashboard"
                 className="nav-item navItemStyle"
-                onClick={playsound}
               >
                 Dashboard
               </Nav.Link>
@@ -223,7 +218,6 @@ const AdminNavbar = () => {
                 as={NavLink}
                 to="/admin/users"
                 className="nav-item navItemStyle"
-                onClick={playsound}
               >
                 Users
               </Nav.Link>
@@ -231,7 +225,6 @@ const AdminNavbar = () => {
                 as={NavLink}
                 to="/admin/admins"
                 className="nav-item navItemStyle"
-                onClick={playsound}
               >
                 Admins
               </Nav.Link>
@@ -240,21 +233,29 @@ const AdminNavbar = () => {
                 as={NavLink}
                 to="/admin/feedback"
                 className="nav-item navItemStyle"
-                onClick={playsound}
               >
                 Feedbacks
               </Nav.Link>
               <Nav.Link
                 as={NavLink}
-                to="/home"
+                to="/admin/changepassword"
                 className="nav-item navItemStyle"
-                onClick={() => {
-                  handleLogout();
-                  playsound();
-                }}
               >
-                Logout
+                Change-Password
               </Nav.Link>
+              <Nav.Link
+  as="button"
+  className="nav-item navItemStyle"
+  onClick={() => {
+    const res = window.confirm("Do you want to logout?");
+    if (res) {
+      handleLogout();
+    }
+  }}
+>
+  Logout
+</Nav.Link>
+
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -4,8 +4,6 @@ import AdminFooter from "./AdminFooter";
 import { Outlet } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { MdSignalWifiStatusbarConnectedNoInternet4 } from "react-icons/md";
-import FluidAnimation from "../CustomStyles/FluidAnimation";
-import CustomCursor from "../CustomStyles/CustomCursor";
 
 const AdminLay = () => {
   const [showOffline, setShowOffline] = useState(false);
@@ -23,7 +21,7 @@ const AdminLay = () => {
   
   return (
     <div>
-      <FluidAnimation/>
+      
       {showOffline && (
         <div
           style={{
@@ -67,7 +65,7 @@ const AdminLay = () => {
       <AdminNavbar /></div>
       <div style={{minHeight:"100vh"}}>
       <Outlet />
-      <CustomCursor color="skyblue" index='-100'/>
+      
       </div>
       <div style={{ minWidth: "100vw" }}>
         <AdminFooter></AdminFooter>

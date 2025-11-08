@@ -186,11 +186,11 @@ export const loginUser = async (req, res) => {
     const { email, username, password } = req.body;
     const user = await User.findOne({ email: email.trim().toLowerCase() });
     if (!user) {
-      return res.status(400).json({ message: "invalid credentials" });
+      return res.status(400).json({ message: "User not Found" });
     }
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res.status(400).json({ message: "invalid credentials" });
+      return res.status(400).json({ message: "invalid password" });
     }
     await User.findByIdAndUpdate(user._id,{userStatus:"Active"});
     res.status(200).json({

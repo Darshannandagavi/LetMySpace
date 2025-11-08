@@ -66,16 +66,12 @@ const Register = () => {
         const res = await axios.post(`http://localhost:8000/user/verifyEmail`, {
           email: registerData.email,
         });
-        const audio = new Audio("/Success_Sound.mp3");
-        audio.currentTime = 1;
-        audio.play();
+        
         console.log(res.data.verificationCode);
         setSuccessMessage("Email Verification Code sent");
       } catch (error) {
         setError("Error in sending verification code");
-        const audio = new Audio("/Error_Sound.mp3");
-        audio.currentTime = 0.5;
-        audio.play();
+        
         console.log(error);
       }
     }
@@ -156,9 +152,7 @@ const Register = () => {
           if (registerResponse.status === 201) {
             setSuccessMessage("User registered successfully"); //set success message
             setError("");
-            const audio = new Audio("/Success_Sound.mp3");
-            audio.currentTime = 1;
-            audio.play();
+            
             setRegisterData({
               firstName: "",
               lastName: "",
@@ -185,24 +179,19 @@ const Register = () => {
           } else if (registerResponse.status === 420) {
             setError("Invalid Verification Code");
             const audio = new Audio("/Error_Sound.mp3");
-            audio.currentTime = 0.5;
-            audio.play();
+            
             console.log("invalid verification code");
           } else {
             setError("Error registering user.Please try again.");
             setSuccessMessage("");
-            const audio = new Audio("/Error_Sound.mp3");
-            audio.currentTime = 0.5;
-            audio.play();
+           
           }
         } catch (error) {
           setError(
             error.response?.data?.message ||
               "Error uploading file or registering user.please try again."
           );
-          const audio = new Audio("/Error_Sound.mp3");
-          audio.currentTime = 0.5;
-          audio.play();
+         
           setSuccessMessage("");
           console.log(error);
         }

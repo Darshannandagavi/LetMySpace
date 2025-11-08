@@ -207,7 +207,7 @@ const Services = () => {
       >
         <div className="container section-title">
           <h2>Find Your Ideal Rental Property with LetMySpace</h2>
-          <p style={{color:'Red'}}>
+          <p>
             Discover the perfect space for your home or business with our expert
             rental solutions.
           </p>

@@ -59,7 +59,8 @@ function App() {
         <Route path='dashboard' element={<Dashboard/>}></Route>    
         <Route path='contentmanagement' element={<ContentManagement/>}></Route> 
         <Route path='users' element={<AllUsers/>}></Route>        
-        <Route path='admins' element={<AllAdmins/>}></Route>               
+        <Route path='admins' element={<AllAdmins/>}></Route>      
+        <Route path='changepassword' element={<ChangePassword/>}></Route>          
         </Route>
         <Route path='*' element={<PageNotFound/>}></Route>
       </Routes>

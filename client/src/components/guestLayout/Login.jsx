@@ -82,23 +82,17 @@ const Login = (props) => {
         if (result.status === 200) {
           localStorage.setItem("email", email);
           console.log(result.data.user.role);
-          const audio = new Audio("/Success_Sound.mp3");
-          audio.currentTime = 0;
-          audio.play();
+          
           if (result.data.user.role === "Admin") navigate("/admin/dashboard");
           else if (result.data.user.role === "User") navigate("/user/userhome");
         } else {
-          const audio = new Audio("/Error_Sound.mp3");
-          audio.currentTime = 0;
-          audio.play();
+          
           setShowError("Wrong Username or Password");
           setShowSuccess("");
         }
       } catch (error) {
-        const audio = new Audio("/Error_Sound.mp3");
-        audio.currentTime = 0;
-        audio.play();
-        setShowError("Invalid email or Password");
+    
+        setShowError(error.response.data.message);
         setShowSuccess("");
       } finally {
         setLoader(false);

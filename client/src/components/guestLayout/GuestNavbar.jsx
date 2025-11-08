@@ -5,9 +5,7 @@ import { NavLink } from "react-router-dom";
 
 const GuestNavbar = () => {
   
-  const audio = new Audio("/NavbarSound3.mp3");
-  const playsound=()=>{audio.currentTime=0.2;
-  audio.play();}
+  
   return (
     <>
       <style>
@@ -209,7 +207,7 @@ const GuestNavbar = () => {
                   
                   textShadow:isActive?"0 0 10px white":null
                 })}
-                onClick={playsound}
+                
               >
                Home
               </Nav.Link>
@@ -224,7 +222,7 @@ const GuestNavbar = () => {
                   
                   textShadow:isActive?"0 0 10px white":null
                   })}
-                  onClick={playsound}
+                  
               >
                 About
               </Nav.Link>
@@ -239,7 +237,7 @@ const GuestNavbar = () => {
                   
                   textShadow:isActive?"0 0 10px white":null
                   })}
-                  onClick={playsound}
+                  
               >
                 Services
               </Nav.Link>
@@ -254,7 +252,7 @@ const GuestNavbar = () => {
                   
                   textShadow:isActive?"0 0 10px white":null
                   })}
-                  onClick={playsound}
+                
               >
                Contact
               </Nav.Link>
@@ -269,7 +267,7 @@ const GuestNavbar = () => {
                     
                     textShadow:isActive?"0 0 10px white":null
                   })}
-                  onClick={playsound}
+                  
               >
                 Register
               </Nav.Link>
@@ -283,7 +281,7 @@ const GuestNavbar = () => {
                   color: isActive ? "white" : null,
                   textShadow:isActive?"0 0 10px white":null
                   })}
-                  onClick={playsound}
+              
               >
                 Login
               </Nav.Link>
