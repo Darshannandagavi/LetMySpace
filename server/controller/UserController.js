@@ -273,12 +273,32 @@ const sendForgotPasswordEmail = async (user, password) => {
       from: process.env.EMAIL,
       to: user.email,
       subject: "Temporary Password for Account Access",
-      html: `<p>Hello ${user.firstName},</p>
-            <p>Below is the temprary password to login.Please change it after logging in</p>
-            <br><br>
-            <h3>${password}</h3>
-            <br><br>
-            <p>Best regards,<br>Let-My-Space</p>`,
+      html: `
+  <div style="max-width:600px;margin:0 auto;padding:30px;background-color:#ffffff;
+              border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.1);
+              font-family:Arial,Helvetica,sans-serif;line-height:1.6;color:#333;">
+    <h2 style="text-align:center;color:#1a73e8;margin-bottom:25px;">Let-My-Space</h2>
+    <p>Hello <strong>${user.firstName}</strong>,</p>
+    <p>Below is your temporary password to log in. Please make sure to change it after logging in for security reasons.</p>
+
+    <div style="text-align:center;margin:30px 0;">
+      <span style="display:inline-block;background-color:#f0f4ff;color:#1a73e8;
+                  padding:12px 28px;border-radius:6px;font-size:22px;
+                  font-weight:bold;letter-spacing:1px;font-family:monospace;">
+        ${password}
+      </span>
+    </div>
+
+    <p style="margin-top:25px;">Best regards,<br>
+    <strong>The Let-My-Space Team</strong></p>
+
+    <hr style="margin-top:40px;border:none;border-top:1px solid #eee;">
+    <p style="font-size:12px;color:#999;text-align:center;margin-top:10px;">
+      &copy; ${new Date().getFullYear()} Let-My-Space. All rights reserved.
+    </p>
+  </div>
+`
+
     };
     return new Promise((resolve, reject) => {
       transporter.sendMail(mailOptions, (error, info) => {
