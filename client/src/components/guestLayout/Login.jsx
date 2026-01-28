@@ -47,7 +47,7 @@ const Login = (props) => {
       try {
         setLoader(true);
         const response = await axios.put(
-          `http://localhost:8000/user/forgotPassword/${email}`
+          `https://letmyspace.onrender.com/user/forgotPassword/${email}`
         );
         if (response.status === 200) {
           setShowSuccess("temporary password sent to email");
@@ -74,7 +74,7 @@ const Login = (props) => {
     } else {
       setLoader(true);
       try {
-        const result = await axios.post("http://localhost:8000/user/login", {
+        const result = await axios.post("https://letmyspace.onrender.com/user/login", {
           email,
           password,
         });

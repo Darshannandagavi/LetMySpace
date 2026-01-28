@@ -55,7 +55,7 @@ const PropertyUploader = () => {
       formdata.append("propImg1", propertyData.propImg1);
       try {
         const uploadResponse = await axios.post(
-          "http://localhost:8000/propertyImages",
+          "https://letmyspace.onrender.com/propertyImages",
           formdata,
           {
             headers: { "Content-type": "multipart/form-data" },
@@ -76,7 +76,7 @@ const PropertyUploader = () => {
         propImg1: filepath || propertyData.propImg1,
       };
       const result = await axios.post(
-        "http://localhost:8000/user/propertyUploader",
+        "https://letmyspace.onrender.com/user/propertyUploader",
         finalpropertyData
       );
       if (result.status === 200) {

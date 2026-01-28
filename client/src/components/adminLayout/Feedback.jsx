@@ -13,7 +13,7 @@ const Feedback = () => {
     fetchFeedbacks();
   }, []);
   const fetchFeedbacks = async () => {
-    const res = await axios.get("http://localhost:8000/contact/feedback");
+    const res = await axios.get("https://letmyspace.onrender.com/contact/feedback");
     setFeedback(res.data.feedbacks.reverse());
     console.log(feedback);
   };

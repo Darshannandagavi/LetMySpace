@@ -31,7 +31,7 @@ const Contact = () => {
     setLoader(true);
     try {
       const response = await axios.post(
-        "http://localhost:8000/contact",
+        "https://letmyspace.onrender.com/contact",
         formData
       );
       if (response.status === 200) {

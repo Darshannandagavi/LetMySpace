@@ -8,7 +8,7 @@ const AdminNavbar = () => {
     const email = localStorage.getItem("email");
     if (email) {
       const logout = await axios.put(
-        `http://localhost:8000/user/logout/?email=${email}`
+        `https://letmyspace.onrender.com/user/logout/?email=${email}`
       );
       console.log(logout);
       navigate('/')

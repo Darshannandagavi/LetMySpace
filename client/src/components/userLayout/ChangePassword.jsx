@@ -25,7 +25,7 @@ const ChangePassword = () => {
     try {
       setLoader(true);
       const response = await axios.put(
-        `http://localhost:8000/user/forgotPassword/${email}`
+        `https://letmyspace.onrender.com/user/forgotPassword/${email}`
       );
       if (response.status === 200) {
         setShowSuccess("temporary password sent to email");
@@ -45,7 +45,7 @@ const ChangePassword = () => {
       setLoader(true);
       console.log(email, newPassword, oldPassword);
       const result = await axios.post(
-        `http://localhost:8000/user/changepassword`,
+        `https://letmyspace.onrender.com/user/changepassword`,
         { email, oldPassword, newPassword }
       );
       if (result.status === 200) {

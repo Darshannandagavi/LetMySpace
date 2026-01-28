@@ -10,7 +10,7 @@ const UserNavbar = () => {
       const email = localStorage.getItem("email");
       console.log(email);
       const res = await axios.put(
-        `http://localhost:8000/user/logout/?email=${email}`
+        `https://letmyspace.onrender.com/user/logout/?email=${email}`
       );
       console.log(res);
       localStorage.removeItem("email");

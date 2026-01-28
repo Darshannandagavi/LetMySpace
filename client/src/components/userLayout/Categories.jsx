@@ -30,7 +30,7 @@ const Categories = () => {
   }, []);
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/category");
+      const response = await axios.get("https://letmyspace.onrender.com/category");
       if (response.status === 200) {
         const sortedCategories = response.data.categories.sort((a, b) =>
           a.categoryName.localeCompare(b.categoryName)
@@ -63,12 +63,12 @@ const Categories = () => {
         let response;
         if (isEditMode) {
           response = await axios.put(
-            `http://localhost:8000/category/${categoryId}`,
+            `https://letmyspace.onrender.com/category/${categoryId}`,
             categoryData
           );
         } else {
           response = await axios.post(
-            "http://localhost:8000/category",
+            "https://letmyspace.onrender.com/category",
             categoryData
           );
         }
@@ -106,7 +106,7 @@ const Categories = () => {
   const handleDelete = async (category) => {
     try {
       const response = await axios.delete(
-        `http://localhost:8000/category/${category._id}`
+        `https://letmyspace.onrender.com/category/${category._id}`
       );
       if (response.status === 200) {
         alert("Category deleted successfully");

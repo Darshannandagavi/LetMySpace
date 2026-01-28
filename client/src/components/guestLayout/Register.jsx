@@ -63,7 +63,7 @@ const Register = () => {
     if (registerData.email.includes("@gmail.com")) {
       setLoader(true);
       try {
-        const res = await axios.post(`http://localhost:8000/user/verifyEmail`, {
+        const res = await axios.post(`https://letmyspace.onrender.com/user/verifyEmail`, {
           email: registerData.email,
         });
         
@@ -105,7 +105,7 @@ const Register = () => {
     //if the form is valid,proceed with file upload and user registration
     if (form.checkValidity()) {
       try {
-        const spammer = await axios.post("http://localhost:8000/user/spam", {
+        const spammer = await axios.post("https://letmyspace.onrender.com/user/spam", {
           email: registerData.email,
         });
         if (spammer) setSpammer(true);
@@ -125,7 +125,7 @@ const Register = () => {
             formData.append("file", image);
             //upload the file
             const uploadResponse = await axios.post(
-              "http://localhost:8000/upload",
+              "https://letmyspace.onrender.com/upload",
               formData,
               {
                 headers: { "Content-type": "multipart/form-data" },
@@ -146,7 +146,7 @@ const Register = () => {
           };
           //send the registration data to backend API
           const registerResponse = await axios.post(
-            "http://localhost:8000/user",
+            "https://letmyspace.onrender.com/user",
             updateRegisterData
           );
           if (registerResponse.status === 201) {

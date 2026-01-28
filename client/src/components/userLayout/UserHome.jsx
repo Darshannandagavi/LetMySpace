@@ -32,7 +32,7 @@ const UserHome = () => {
       }
       if (email) {
         setLoader(true);
-        let response = await axios.get("http://localhost:8000/user/properties");
+        let response = await axios.get("https://letmyspace.onrender.com/user/properties");
         setProperties(response.data.reverse());
       }
     } catch (error) {
@@ -447,7 +447,7 @@ const UserHome = () => {
                       style={{
                         backgroundImage: `url("${
                           item.propImg1
-                            ? `http://localhost:8000/${item.propImg1.replace(/\\/g, "/")}`
+                            ? `https://letmyspace.onrender.com/${item.propImg1.replace(/\\/g, "/")}`
                             : "https://i.pinimg.com/736x/aa/e7/ec/aae7ec42232faba3ecd375b04eeb9d93.jpg"
                         }")`
                       }}
@@ -526,7 +526,7 @@ const UserHome = () => {
                             style={{
                               backgroundImage: `url("${
                                 item.propImg1
-                                  ? `http://localhost:8000/${item.propImg1.replace(/\\/g, "/")}`
+                                  ? `https://letmyspace.onrender.com/${item.propImg1.replace(/\\/g, "/")}`
                                   : "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
                               }")`
                             }}

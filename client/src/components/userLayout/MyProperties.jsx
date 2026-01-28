@@ -38,7 +38,7 @@ const MyProperties = () => {
       if (email) {
         console.log(email);
         const res = await axios.get(
-          `http://localhost:8000/user/uploadedProperties/?email=${email}`
+          `https://letmyspace.onrender.com/user/uploadedProperties/?email=${email}`
         );
         console.log(res.data);
         setProperty(res.data.reverse());
@@ -61,7 +61,7 @@ const MyProperties = () => {
     if (conf) {
       try {
         const res = await axios.delete(
-          `http://localhost:8000/user/uploadedProperties/${property._id}`
+          `https://letmyspace.onrender.com/user/uploadedProperties/${property._id}`
         );
         console.log(res);
         fetchMyProperties();
@@ -326,7 +326,7 @@ const MyProperties = () => {
                           borderRadius: "5px",
                           backgroundImage: `url("${
                             property.propImg1
-                              ? `http://localhost:8000/${property.propImg1.replace(
+                              ? `https://letmyspace.onrender.com/${property.propImg1.replace(
                                   /\\/g,
                                   "/"
                                 )}`

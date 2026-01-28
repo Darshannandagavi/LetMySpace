@@ -18,7 +18,7 @@ const AllAdmins = () => {
   }, []);
   const fetchUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/user");
+      const res = await axios.get("https://letmyspace.onrender.com/user");
       console.log(res.data);
       setUsers(res.data);
     } catch (error) {

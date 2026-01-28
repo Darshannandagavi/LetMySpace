@@ -36,7 +36,7 @@ const SubCategories = () => {
   // Fetch categories from backend
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/category");
+      const response = await axios.get("https://letmyspace.onrender.com/category");
       if (response.status === 200) {
         const data = response.data.categories;
         if (Array.isArray(data)) {
@@ -55,7 +55,7 @@ const SubCategories = () => {
   // Fetch subcategories from backend
   const fetchSubcategories = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/subCategory");
+      const response = await axios.get("https://letmyspace.onrender.com/subCategory");
       if (response.status === 200) {
         setSubCategories(response.data.subCategories || []);
       }
@@ -100,12 +100,12 @@ const SubCategories = () => {
       let response;
       if (isEditMode) {
         response = await axios.put(
-          `http://localhost:8000/subCategory/${editSubcategoryId}`,
+          `https://letmyspace.onrender.com/subCategory/${editSubcategoryId}`,
           subCategoryData
         );
       } else {
         response = await axios.post(
-          "http://localhost:8000/subCategory",
+          "https://letmyspace.onrender.com/subCategory",
           subCategoryData
         );
       }
@@ -147,7 +147,7 @@ const SubCategories = () => {
     if (window.confirm("Are you sure you want to delete this subcategory?")) {
       try {
         const response = await axios.delete(
-          `http://localhost:8000/subCategory/${subcategory._id}`
+          `https://letmyspace.onrender.com/subCategory/${subcategory._id}`
         );
         if (response.status === 200) {
           alert("Subcategory deleted successfully");

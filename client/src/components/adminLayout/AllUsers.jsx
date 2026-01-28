@@ -42,7 +42,7 @@ const AllUsers = () => {
       if (!navigator.onLine) {
         setShowOffline(true);
       }
-      const res = await axios.get("http://localhost:8000/user");
+      const res = await axios.get("https://letmyspace.onrender.com/user");
       console.log(res.data);
       setUsers(res.data);
     } catch (error) {
@@ -55,10 +55,10 @@ const AllUsers = () => {
       try {
         console.log(user.email);
         const delres = await axios.delete(
-          `http://localhost:8000/admin/deluser?email=${user.email}`
+          `https://letmyspace.onrender.com/admin/deluser?email=${user.email}`
         );
         const spamres = await axios.post(
-          `http://localhost:8000/admin/spam?email=${user.email}`
+          `https://letmyspace.onrender.com/admin/spam?email=${user.email}`
         );
         console.log("added to spammer",spamres.status);
         console.log("user delete status",delres.status);

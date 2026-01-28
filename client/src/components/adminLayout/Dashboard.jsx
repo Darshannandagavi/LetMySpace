@@ -21,7 +21,7 @@ const Dashboard = () => {
   }, []);
   const getUserCount = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/admin/dashboard");
+      const res = await axios.get("https://letmyspace.onrender.com/admin/dashboard");
       setUserLen(res.data.users.length);
       console.log(res.data.users);
       let onlineCount = 0;
@@ -43,7 +43,7 @@ const Dashboard = () => {
   };
   const getProperties = async () => {
     try {
-      const propRes = await axios.get("http://localhost:8000/user/properties");
+      const propRes = await axios.get("https://letmyspace.onrender.com/user/properties");
       console.log(propRes);
 
       setProperties(propRes.data.reverse());
@@ -60,7 +60,7 @@ const Dashboard = () => {
     if (conf) {
       try {
         const delRes = await axios.delete(
-          `http://localhost:8000/user/uploadedproperties/${id}`
+          `https://letmyspace.onrender.com/user/uploadedproperties/${id}`
         );
         if (delRes.status === 200) {
           alert("property deleted successfully");
@@ -215,7 +215,7 @@ const Dashboard = () => {
                       <img
                         src={
                           prop.propImg1
-                            ? `http://localhost:8000/${prop.propImg1}`
+                            ? `https://letmyspace.onrender.com/${prop.propImg1}`
                             : `https://i.pinimg.com/736x/aa/e7/ec/aae7ec42232faba3ecd375b04eeb9d93.jpg`
                         }
                         style={{
@@ -495,7 +495,7 @@ const Dashboard = () => {
                                   border: "none",
                                   backgroundImage: `url("${
                                     prop.propImg1
-                                      ? `http://localhost:8000/${prop.propImg1.replace(
+                                      ? `https://letmyspace.onrender.com/${prop.propImg1.replace(
                                           /\\/g,
                                           "/"
                                         )}`
