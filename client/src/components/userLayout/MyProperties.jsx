@@ -28,7 +28,7 @@ const MyProperties = () => {
       easing: "ease-in-out",
       once: true,
     });
-  }, []);
+  }, [fetchMyProperties]);
   const [property, setProperty] = useState([]);
   const [loader, setLoader] = useState(false);
   const fetchMyProperties = async () => {

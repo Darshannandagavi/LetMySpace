@@ -35,7 +35,7 @@ const routeList=['/home','/about','/services','/contact','/register','/login']
     return ()=> window.removeEventListener(
       'keydown',handleShortcut
     );
-  });
+  },[navigate]);
   useEffect(()=>{
     const handleRoutes=(e)=>{
       if(e.ctrlKey){
@@ -54,7 +54,7 @@ const routeList=['/home','/about','/services','/contact','/register','/login']
   }
     window.addEventListener('keydown',handleRoutes);
     return ()=> window.removeEventListener('keydown',handleRoutes);
-  },[location,navigate]);
+  },[location.pathname, navigate]);
   return (
     <div
       style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
