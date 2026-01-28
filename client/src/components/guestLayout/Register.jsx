@@ -178,7 +178,7 @@ const Register = () => {
             setImagePreview(null);
           } else if (registerResponse.status === 420) {
             setError("Invalid Verification Code");
-            const audio = new Audio("/Error_Sound.mp3");
+           
             
             console.log("invalid verification code");
           } else {
