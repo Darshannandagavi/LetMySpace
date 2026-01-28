@@ -2,7 +2,7 @@ import React ,{useEffect, useState} from "react";
 import { Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { FaCircleCheck,FaArrowRightLong } from "react-icons/fa6";
-import CustomCursor from "../CustomStyles/CustomCursor";
+
 const About = () => {
   const [size,setSize]=useState("20px");
       useEffect(()=>{

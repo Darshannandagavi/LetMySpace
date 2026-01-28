@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Col, Button, Row, Card, Badge, Modal } from "react-bootstrap";
+import { Col, Button, Row, Card, Badge } from "react-bootstrap";
 import Loader from "../CustomStyles/Loader";
 import { NavLink, useNavigate } from 'react-router-dom'
 import { Nav } from "react-bootstrap";

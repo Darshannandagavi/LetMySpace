@@ -35,7 +35,7 @@ const routeList=['/home','/about','/services','/contact','/register','/login']
     return ()=> window.removeEventListener(
       'keydown',handleShortcut
     );
-  },[navigate]);
+  },[routeList]);
   useEffect(()=>{
     const handleRoutes=(e)=>{
       if(e.ctrlKey){

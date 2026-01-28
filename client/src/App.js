@@ -24,7 +24,6 @@ import Feedback from './components/adminLayout/Feedback';
 import AllUsers from './components/adminLayout/AllUsers';
 import AllAdmins from './components/adminLayout/AllAdmins';
 import PageNotFound from './components/PageNotFound';
-import FluidAnimation from './components/CustomStyles/FluidAnimation';
 
 function App() {
   return (
