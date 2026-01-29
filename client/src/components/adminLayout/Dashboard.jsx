@@ -15,10 +15,6 @@ const Dashboard = () => {
   const [online, setOnline] = useState(0);
   const [offline, setOffline] = useState(0);
   const [showProperty, setShowProperty] = useState(null);
-  useEffect(() => {
-    getUserCount();
-    getProperties();
-  }, []);
   const getUserCount = async () => {
     try {
       const res = await axios.get("https://letmyspace.onrender.com/admin/dashboard");
@@ -55,6 +51,11 @@ const Dashboard = () => {
       console.log("first");
     }
   };
+  useEffect(() => {
+    getUserCount();
+    getProperties();
+  }, []);
+  
   const handleDelete = async (id) => {
     let conf = window.confirm("Are you sure you want to delete this property!");
     if (conf) {

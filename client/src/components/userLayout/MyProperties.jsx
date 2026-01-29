@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import Loader from "../CustomStyles/Loader";
 import axios from "axios";
 import { Button, Row, Col } from "react-bootstrap";
@@ -18,40 +18,37 @@ import { MdBathroom } from "react-icons/md";
 import { MdAccessTimeFilled } from "react-icons/md";
 import { RiLandscapeAiFill } from "react-icons/ri";
 import { useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 const MyProperties = () => {
   const email = localStorage.getItem("email");
   const navigate = useNavigate();
   
   useEffect(() => {
-    fetchMyProperties();
-    window.scrollTo(0, 0);
-    Aos.init({
-      delay: 0,
-      easing: "ease-in-out",
-      once: true,
-    });
-  }, [fetchMyProperties]);
+  fetchMyProperties();
+  window.scrollTo(0, 0);
+  Aos.init({ delay: 0, easing: "ease-in-out", once: true });
+}, [fetchMyProperties]);
+
   const [property, setProperty] = useState([]);
   const [loader, setLoader] = useState(false);
  
   const fetchMyProperties = useCallback(async () => {
   try {
-    if (!email) {
-      navigate("/login");
-      return;
-    }
     setLoader(true);
-    const response = await axios.get(
-      "https://letmyspace.onrender.com/user/properties"
-    );
-    setProperty(response.data.reverse());
-  } catch (error) {
-    console.log(error);
+    if (email) {
+      const res = await axios.get(
+        `https://letmyspace.onrender.com/user/uploadedProperties/?email=${email}`
+      );
+      setProperty(res.data.reverse());
+    }
+  } catch (err) {
+    console.log(err);
   } finally {
     setLoader(false);
   }
-}, [email, navigate]);
+}, [email]);
+
 
 
   const handleDelete = async (property) => {

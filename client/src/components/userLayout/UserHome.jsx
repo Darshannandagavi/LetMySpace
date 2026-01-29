@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Col, Button, Row, Card, Badge } from "react-bootstrap";
 import Loader from "../CustomStyles/Loader";
 import { NavLink, useNavigate } from 'react-router-dom'
 import { Nav } from "react-bootstrap";
+import { useEffect, useState, useCallback } from "react";
 
 const UserHome = () => {
   const navigate = useNavigate();
@@ -13,34 +13,38 @@ const UserHome = () => {
   const [showPropertyDetails, setShowPropertyDetails] = useState(null);
   const [loader, setLoader] = useState(false);
 
+
+  const fetchProperties = useCallback(async () => {
+  try {
+    if (!email) {
+      navigate("/login");
+      return;
+    }
+    setLoader(true);
+    const res = await axios.get(
+      "https://letmyspace.onrender.com/user/properties"
+    );
+    setProperties(res.data.reverse());
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setLoader(false);
+  }
+}, [email, navigate]);
+
+
   useEffect(() => {
-   
-    email && fetchProperties()
-  }, []);
+  if (email) fetchProperties();
+}, [email, fetchProperties]);
+
 
   useEffect(() => {
     const status = localStorage.getItem("status") === 'true';
     setUserAgreed(status);
   }, []);
 
-  const fetchProperties = async () => {
-    try {
-      if (!email) {
-        alert("Hold up! Your space awaits - Just sign in to explore.");
-        navigate("/login");
-        return;
-      }
-      if (email) {
-        setLoader(true);
-        let response = await axios.get("https://letmyspace.onrender.com/user/properties");
-        setProperties(response.data.reverse());
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoader(false);
-    }
-  };
+  
+
 
   const getPropertyTypeStyle = (type) => {
     const styles = {
