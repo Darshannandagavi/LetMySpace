@@ -15,9 +15,24 @@ const Dashboard = () => {
   const [online, setOnline] = useState(0);
   const [offline, setOffline] = useState(0);
   const [showProperty, setShowProperty] = useState(null);
+
+  const getProperties = async () => {
+    try {
+      const propRes = await axios.get(
+        "https://letmyspace.onrender.com/user/properties",
+      );
+      setProperties(propRes.data.reverse());
+      setPropCount(propRes.data.length);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const getUserCount = async () => {
     try {
-      const res = await axios.get("https://letmyspace.onrender.com/admin/dashboard");
+      const res = await axios.get(
+        "https://letmyspace.onrender.com/admin/dashboard",
+      );
       setUserLen(res.data.users.length);
       console.log(res.data.users);
       let onlineCount = 0;
@@ -37,31 +52,18 @@ const Dashboard = () => {
       console.log(error);
     }
   };
-  const getProperties = async () => {
-    try {
-      const propRes = await axios.get("https://letmyspace.onrender.com/user/properties");
-      console.log(propRes);
 
-      setProperties(propRes.data.reverse());
-      setPropCount(propRes.data.length);
-      console.log(properties);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      console.log("first");
-    }
-  };
   useEffect(() => {
     getUserCount();
     getProperties();
   }, []);
-  
+
   const handleDelete = async (id) => {
     let conf = window.confirm("Are you sure you want to delete this property!");
     if (conf) {
       try {
         const delRes = await axios.delete(
-          `https://letmyspace.onrender.com/user/uploadedproperties/${id}`
+          `https://letmyspace.onrender.com/user/uploadedproperties/${id}`,
         );
         if (delRes.status === 200) {
           alert("property deleted successfully");
@@ -498,7 +500,7 @@ const Dashboard = () => {
                                     prop.propImg1
                                       ? `https://letmyspace.onrender.com/${prop.propImg1.replace(
                                           /\\/g,
-                                          "/"
+                                          "/",
                                         )}`
                                       : "https://i.pinimg.com/736x/aa/e7/ec/aae7ec42232faba3ecd375b04eeb9d93.jpg"
                                   }")`,
@@ -570,24 +572,30 @@ const Dashboard = () => {
         <div
           style={{
             height: "100vh",
-            width:"100vw",
+            width: "100vw",
             display: "grid",
-            background:"rgb(54, 23, 47)",
+            background: "rgb(54, 23, 47)",
             justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <h1>Please <Button
-            onClick={() => {
-              navigate("/login");
-            }}
-          >
-            Log-In
-          </Button> first </h1>
-          <div style={{zIndex:"1000"}}>
-         <Login  bg="transparent"/></div>
-         <div style={{zIndex:"100"}}>
-         <BgAnimation bg="rgb(54, 23, 47)"/></div>
+          <h1>
+            Please{" "}
+            <Button
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              Log-In
+            </Button>{" "}
+            first{" "}
+          </h1>
+          <div style={{ zIndex: "1000" }}>
+            <Login bg="transparent" />
+          </div>
+          <div style={{ zIndex: "100" }}>
+            <BgAnimation bg="rgb(54, 23, 47)" />
+          </div>
         </div>
       )}
     </>

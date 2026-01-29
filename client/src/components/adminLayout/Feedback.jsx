@@ -8,15 +8,18 @@ const Feedback = () => {
   const email = localStorage.getItem("email");
   const navigate = useNavigate();
   const [feedback, setFeedback] = useState([]);
-  const fetchFeedbacks = async () => {
-    const res = await axios.get("https://letmyspace.onrender.com/contact/feedback");
-    setFeedback(res.data.feedbacks.reverse());
-    console.log(feedback);
-  };
+  
   useEffect(() => {
-    // window.scrollTo(0,0);
-    fetchFeedbacks();
-  }, [fetchFeedbacks]);
+  const fetchFeedbacks = async () => {
+    const res = await axios.get(
+      "https://letmyspace.onrender.com/contact/feedback"
+    );
+    setFeedback(res.data.feedbacks.reverse());
+  };
+
+  fetchFeedbacks();
+}, []);
+
   
   return (
     <div>

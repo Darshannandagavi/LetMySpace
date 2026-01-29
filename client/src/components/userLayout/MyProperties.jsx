@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Loader from "../CustomStyles/Loader";
 import axios from "axios";
 import { Button, Row, Col } from "react-bootstrap";
@@ -19,46 +19,41 @@ import { MdAccessTimeFilled } from "react-icons/md";
 import { RiLandscapeAiFill } from "react-icons/ri";
 import { useCallback } from "react";
 
-
 const MyProperties = () => {
   const email = localStorage.getItem("email");
   const navigate = useNavigate();
-  
+  const fetchMyProperties = useCallback(async () => {
+    try {
+      setLoader(true);
+      if (email) {
+        const res = await axios.get(
+          `https://letmyspace.onrender.com/user/uploadedProperties/?email=${email}`,
+        );
+        setProperty(res.data.reverse());
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoader(false);
+    }
+  }, [email]);
   useEffect(() => {
-  fetchMyProperties();
-  window.scrollTo(0, 0);
-  Aos.init({ delay: 0, easing: "ease-in-out", once: true });
-}, [fetchMyProperties]);
+    fetchMyProperties();
+    window.scrollTo(0, 0);
+    Aos.init({ delay: 0, easing: "ease-in-out", once: true });
+  }, [fetchMyProperties]);
 
   const [property, setProperty] = useState([]);
   const [loader, setLoader] = useState(false);
- 
-  const fetchMyProperties = useCallback(async () => {
-  try {
-    setLoader(true);
-    if (email) {
-      const res = await axios.get(
-        `https://letmyspace.onrender.com/user/uploadedProperties/?email=${email}`
-      );
-      setProperty(res.data.reverse());
-    }
-  } catch (err) {
-    console.log(err);
-  } finally {
-    setLoader(false);
-  }
-}, [email]);
-
-
 
   const handleDelete = async (property) => {
     let conf = window.confirm(
-      "Are you sure you want to delete your property listing!"
+      "Are you sure you want to delete your property listing!",
     );
     if (conf) {
       try {
         const res = await axios.delete(
-          `https://letmyspace.onrender.com/user/uploadedProperties/${property._id}`
+          `https://letmyspace.onrender.com/user/uploadedProperties/${property._id}`,
         );
         console.log(res);
         fetchMyProperties();
@@ -224,7 +219,7 @@ const MyProperties = () => {
                   border: "2px solid grey",
                   background: "rgba(246, 226, 192, 0.67)",
                   backdropFilter: "blur(15px)",
-                  maxWidth:"690px",
+                  maxWidth: "690px",
                   width: "fit-content",
                   borderRadius: "0px 30px 0px 30px ",
                   padding: "2vw",
@@ -325,7 +320,7 @@ const MyProperties = () => {
                             property.propImg1
                               ? `https://letmyspace.onrender.com/${property.propImg1.replace(
                                   /\\/g,
-                                  "/"
+                                  "/",
                                 )}`
                               : "https://i.pinimg.com/736x/aa/e7/ec/aae7ec42232faba3ecd375b04eeb9d93.jpg"
                           }")`,
