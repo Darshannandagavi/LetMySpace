@@ -22,28 +22,7 @@ import { useCallback } from "react";
 const MyProperties = () => {
   const email = localStorage.getItem("email");
   const navigate = useNavigate();
-   const fetchMyProperties = async () => {
-    try {
-      setLoader(true);
-
-      if (email) {
-        console.log(email);
-        const res = await axios.get(
-          `https://letmyspace.onrender.com/user/uploadedProperties/?email=${email}`
-        );
-        console.log(res.data);
-        setProperty(res.data.reverse());
-      }
-      if (!email) {
-        // alert("Hold up! Your space awaits - Just sign in to explore.");
-        // navigate("/login");
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoader(false);
-    }
-  };
+  
   useEffect(() => {
     fetchMyProperties();
     window.scrollTo(0, 0);
@@ -56,6 +35,24 @@ const MyProperties = () => {
   const [property, setProperty] = useState([]);
   const [loader, setLoader] = useState(false);
  
+  const fetchMyProperties = useCallback(async () => {
+  try {
+    if (!email) {
+      navigate("/login");
+      return;
+    }
+    setLoader(true);
+    const response = await axios.get(
+      "https://letmyspace.onrender.com/user/properties"
+    );
+    setProperty(response.data.reverse());
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setLoader(false);
+  }
+}, [email, navigate]);
+
 
   const handleDelete = async (property) => {
     let conf = window.confirm(
