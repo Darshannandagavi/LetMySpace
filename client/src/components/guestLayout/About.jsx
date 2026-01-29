@@ -147,7 +147,7 @@ Gradient background */
         } 
  
  
-        /* CTA Button */ 
+      
         .cta-button{ 
           display: inline-block; 
           padding: 15px 15px; 
