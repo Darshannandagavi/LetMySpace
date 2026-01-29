@@ -3,10 +3,11 @@ import { GuestHeader } from "./GuestHeader";
 import { GuestFooter } from "./GuestFooter";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+const routeList = ['/home','/about','/services','/contact','/register','/login'];
 
 export const GuestLayout = () => {
-  
-const routeList=['/home','/about','/services','/contact','/register','/login']
+
+// const routeList=['/home','/about','/services','/contact','/register','/login']
   const navigate=useNavigate();
   const location=useLocation();
   useEffect(()=>{
@@ -35,7 +36,7 @@ const routeList=['/home','/about','/services','/contact','/register','/login']
     return ()=> window.removeEventListener(
       'keydown',handleShortcut
     );
-  },[routeList]);
+  },[navigate]);
   useEffect(()=>{
     const handleRoutes=(e)=>{
       if(e.ctrlKey){

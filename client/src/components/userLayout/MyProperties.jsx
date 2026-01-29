@@ -17,21 +17,12 @@ import { MdBedroomParent } from "react-icons/md";
 import { MdBathroom } from "react-icons/md";
 import { MdAccessTimeFilled } from "react-icons/md";
 import { RiLandscapeAiFill } from "react-icons/ri";
+import { useCallback } from "react";
+
 const MyProperties = () => {
   const email = localStorage.getItem("email");
   const navigate = useNavigate();
-  useEffect(() => {
-    fetchMyProperties();
-    window.scrollTo(0, 0);
-    Aos.init({
-      delay: 0,
-      easing: "ease-in-out",
-      once: true,
-    });
-  }, [fetchMyProperties]);
-  const [property, setProperty] = useState([]);
-  const [loader, setLoader] = useState(false);
-  const fetchMyProperties = async () => {
+   const fetchMyProperties = async () => {
     try {
       setLoader(true);
 
@@ -53,6 +44,18 @@ const MyProperties = () => {
       setLoader(false);
     }
   };
+  useEffect(() => {
+    fetchMyProperties();
+    window.scrollTo(0, 0);
+    Aos.init({
+      delay: 0,
+      easing: "ease-in-out",
+      once: true,
+    });
+  }, [fetchMyProperties]);
+  const [property, setProperty] = useState([]);
+  const [loader, setLoader] = useState(false);
+ 
 
   const handleDelete = async (property) => {
     let conf = window.confirm(

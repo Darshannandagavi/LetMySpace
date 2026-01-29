@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { FaCircleCheck,FaArrowRightLong } from "react-icons/fa6";
 
 const About = () => {
-  const [size,setSize]=useState("20px");
+  const [,setSize]=useState("20px");
       useEffect(()=>{
         window.scrollTo(0,0);
       },[]);
