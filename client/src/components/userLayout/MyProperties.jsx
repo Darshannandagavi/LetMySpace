@@ -18,7 +18,7 @@ import { MdBathroom } from "react-icons/md";
 import { MdAccessTimeFilled } from "react-icons/md";
 import { RiLandscapeAiFill } from "react-icons/ri";
 import { useCallback } from "react";
-import {  useCallback } from "react";
+
 
 const MyProperties = () => {
   const email = localStorage.getItem("email");
