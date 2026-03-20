@@ -87,7 +87,7 @@ const Register = () => {
         const spammer = await axios.post("https://letmyspace.onrender.com/user/spam", {
           email: registerData.email,
         });
-        console.log(spammer)
+        console.log(spammer.data)
         if (spammer) setSpammer(true);
       } catch (error) {
         console.log("error in spam check:", error);
