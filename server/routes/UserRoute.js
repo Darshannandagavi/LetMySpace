@@ -9,7 +9,6 @@ userRouter.post('/login',loginUser);
 userRouter.post("/spam",spamChecker);
 userRouter.post("/",registerUser);
 userRouter.get("/",findAllUsers);
-userRouter.post("/verifyEmail",emailVerification)
 userRouter.get("/uploadedProperties",getMyProperty);
 userRouter.put("/logout",logoutUser);
 userRouter.delete("/uploadedProperties/:id",deleteMyProperty);

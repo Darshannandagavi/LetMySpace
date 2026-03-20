@@ -150,14 +150,12 @@ const Register = () => {
             updateRegisterData
           );
           if (registerResponse.status === 201) {
-            setSuccessMessage("User registered successfully"); //set success message
+            setSuccessMessage("User registered successfully");
             setError("");
-            
             setRegisterData({
               firstName: "",
               lastName: "",
               email: "",
-              emailVerification: "",
               phoneNumber: "",
               gender: "",
               dob: "",
@@ -176,15 +174,9 @@ const Register = () => {
             });
             setImage("");
             setImagePreview(null);
-          } else if (registerResponse.status === 420) {
-            setError("Invalid Verification Code");
-           
-            
-            console.log("invalid verification code");
           } else {
             setError("Error registering user.Please try again.");
             setSuccessMessage("");
-           
           }
         } catch (error) {
           setError(

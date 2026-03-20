@@ -30,7 +30,7 @@ const Login = (props) => {
     else setShowForgot(false);
   };
   const handlePassword = (event) => {
-    if (event.target.value.length >= 5 && email.length >= 10)
+    if (event.target.value.length >= 4 && email.length >= 10)
       setShowLogin(true);
     else setShowLogin(false);
     setPassword(event.target.value);

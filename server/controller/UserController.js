@@ -1,17 +1,16 @@
 import nodemailer from "nodemailer";
 import bcrypt from "bcrypt";
 import { User, PropertyData } from "../models/UserModel.js";
-import { verificationCodes } from "./CodeStore.js";
 import { SpamUser } from "../models/SpamUser.js";
 
 export const registerUser = async (req, res) => {
   try {
-    const { email, password, userStatus, role ,emailVerification} = req.body;
+    const { email, password, userStatus, role } = req.body;
+
     if (await User.findOne({ email })) {
       return res.status(400).json({ message: "User already exists" });
     }
-    if(emailVerification===verificationCodes[email]){
-      console.log("email varification complete");
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
       ...req.body,
@@ -19,12 +18,10 @@ export const registerUser = async (req, res) => {
       userStatus: userStatus || "Active",
       role: role || "User",
     });
+
     await newUser.save();
     await sendEmail(newUser, res);
     res.status(201).json({ message: "User registered successfully" });
-  }else{
-    res.status(420).json({message:"invalid varification code"});
-  }
   } catch (error) {
     console.error("registration error:", error);
     res.status(500).json({ message: error.message });
@@ -79,8 +76,6 @@ The LetMySpace Team</pre></div>`,
     throw new Error(error);
   }
 };
-
-
 
 export const emailVerification=async(req,res)=>{
     try{

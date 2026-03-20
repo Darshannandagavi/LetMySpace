@@ -48,11 +48,11 @@ const UserHome = () => {
 
   const getPropertyTypeStyle = (type) => {
     const styles = {
-      RentHome: { background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)", color: "white" },
-      SaleHome: { background: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)", color: "white" },
-      RentShop: { background: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)", color: "white" },
-      SaleShop: { background: "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)", color: "white" },
-      SaleLand: { background: "linear-gradient(135deg, #fa709a 0%, #fee140 100%)", color: "white" }
+      RentHome: { background: "#764ba2", color: "white" },
+      SaleHome: { background: "#f5576c", color: "white" },
+      RentShop: { background: " #fe4f4f", color: "white" },
+      SaleShop: { background: "#437ae9", color: "white" },
+      SaleLand: { background: "#076400", color: "white" }
     };
     return styles[type] || { background: "#6c757d", color: "white" };
   };
@@ -168,7 +168,7 @@ const UserHome = () => {
           }
 
           .view-details-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background:  #667eea ;
             border: none;
             padding: 12px 30px;
             border-radius: 25px;
