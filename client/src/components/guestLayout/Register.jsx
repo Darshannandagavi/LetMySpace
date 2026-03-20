@@ -85,17 +85,19 @@ const Register = () => {
     if (form.checkValidity()) {
       try {
         setLoader(true);
-        const spammer = await axios.post("https://letmyspace.onrender.com/user/spam", {
+        const res = await axios.post("https://letmyspace.onrender.com/user/spam", {
           email: registerData.email,
         });
-        console.log(spammer.data)
-        if (spammer) setSpammer(true);
+     
+        if (res.data.isSpam) setSpammer(true);
       } catch (error) {
+        setLoader(false);
         console.log("error in spam check:", error);
         setError("Error in Spam check");
       }
       if (spammer) {
-        setError();
+        setLoader(false);
+       
         setError("you are banned from this site ");
       } else {
         try {
@@ -126,6 +128,7 @@ const Register = () => {
             "https://letmyspace.onrender.com/user",
             updateRegisterData
           );
+          setLoader(false);
           if (registerResponse.status === 201) {
             setSuccessMessage("User registered successfully");
             setError("");
@@ -162,6 +165,7 @@ const Register = () => {
           );
           setSuccessMessage("");
           console.log(error);
+          setLoader(false);
         }
       }
     }
