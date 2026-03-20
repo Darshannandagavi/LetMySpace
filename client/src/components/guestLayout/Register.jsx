@@ -84,6 +84,7 @@ const Register = () => {
     setValidated(true);
     if (form.checkValidity()) {
       try {
+        setLoader(true);
         const spammer = await axios.post("https://letmyspace.onrender.com/user/spam", {
           email: registerData.email,
         });
