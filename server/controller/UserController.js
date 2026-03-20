@@ -478,12 +478,15 @@ export const logoutUser=async(req,res)=>{
   }
 }
 
-export const spamChecker=async(req,res)=>{
-  try{
-    const {email}=req.body;
-    const spam=await SpamUser.find({email});
-    res.status(200).json(spam);
-  }catch(error){
-    res.status(500).json({message:"error in checking spam"});
+export const spamChecker = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const exists = await SpamUser.exists({ email });
+
+    res.status(200).json({ isSpam: !!exists });
+
+  } catch (error) {
+    res.status(500).json({ message: "error in checking spam" });
   }
-}
+};

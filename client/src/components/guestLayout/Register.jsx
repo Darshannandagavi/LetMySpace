@@ -29,7 +29,6 @@ const Register = () => {
     firstName: "",
     lastName: "",
     email: "",
-    emailVerification: "",
     phoneNumber: "",
     gender: "",
     dob: "",
@@ -47,7 +46,6 @@ const Register = () => {
     role: "User",
   });
 
-  //handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setRegisterData({
@@ -59,25 +57,7 @@ const Register = () => {
       console.log("enter valid date");
     }
   };
-  const handleVerify = async () => {
-    if (registerData.email.includes("@gmail.com")) {
-      setLoader(true);
-      try {
-        const res = await axios.post(`https://letmyspace.onrender.com/user/verifyEmail`, {
-          email: registerData.email,
-        });
-        
-        console.log(res.data.verificationCode);
-        setSuccessMessage("Email Verification Code sent");
-      } catch (error) {
-        setError("Error in sending verification code");
-        
-        console.log(error);
-      }
-    }
-    setLoader(false);
-  };
-  //handle file change for image upload
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -92,22 +72,22 @@ const Register = () => {
       }
     }
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     window.scrollTo(0, 0);
 
     const form = event.currentTarget;
-    //trigger bootstrap validation styles
     if (form.checkValidity() === false) {
       event.stopPropagation();
     }
-    setValidated(true); //mark the form as validated
-    //if the form is valid,proceed with file upload and user registration
+    setValidated(true);
     if (form.checkValidity()) {
       try {
         const spammer = await axios.post("https://letmyspace.onrender.com/user/spam", {
           email: registerData.email,
         });
+        console.log(spammer)
         if (spammer) setSpammer(true);
       } catch (error) {
         console.log("error in spam check:", error);
@@ -119,11 +99,9 @@ const Register = () => {
       } else {
         try {
           let filePath = "";
-          //if there's an image file,upload it first
           if (image) {
             const formData = new FormData();
             formData.append("file", image);
-            //upload the file
             const uploadResponse = await axios.post(
               "https://letmyspace.onrender.com/upload",
               formData,
@@ -134,17 +112,15 @@ const Register = () => {
             if (uploadResponse.data.filePath) {
               filePath = uploadResponse.data.filePath;
             } else {
-              setError("File upload failed.please try again.");
+              setError("File upload failed. Please try again.");
               setSuccessMessage("");
               return;
             }
           }
-          // Now, include the filePath in the registerData and proceed with user registration
           const updateRegisterData = {
             ...registerData,
             profilePicture: filePath,
           };
-          //send the registration data to backend API
           const registerResponse = await axios.post(
             "https://letmyspace.onrender.com/user",
             updateRegisterData
@@ -175,27 +151,28 @@ const Register = () => {
             setImage("");
             setImagePreview(null);
           } else {
-            setError("Error registering user.Please try again.");
+            setError("Error registering user. Please try again.");
             setSuccessMessage("");
           }
         } catch (error) {
           setError(
             error.response?.data?.message ||
-              "Error uploading file or registering user.please try again."
+              "Error uploading file or registering user. Please try again."
           );
-         
           setSuccessMessage("");
           console.log(error);
         }
       }
     }
   };
+
   const styles = {
     border: "2px solid black",
     backgroundImage:
       "linear-gradient(rgba(255, 147, 15,0.3),rgba(255, 249, 91,0.3))",
     borderRadius: "0 30px",
   };
+
   return (
     <div
       style={{
@@ -242,8 +219,7 @@ const Register = () => {
                   pattern="[a-zA-Z]{2,9}"
                 ></Form.Control>
                 <Form.Control.Feedback type="invalid">
-                  Please enter a valid first name (2-9 characters,alphabets
-                  only)
+                  Please enter a valid first name (2-9 characters, alphabets only)
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -264,6 +240,7 @@ const Register = () => {
               </Form.Group>
             </Col>
           </Row>
+
           <Row className="mb-3">
             <Col md={8}>
               <Form.Group controlId="email">
@@ -282,29 +259,6 @@ const Register = () => {
               </Form.Group>
             </Col>
             <Col md={4}>
-              <Form.Label>verification</Form.Label>
-              <br />
-              <Button onClick={handleVerify}>Get verification code</Button>
-            </Col>
-          </Row>
-          <Row className="mb-3">
-            <Col md={4}>
-              <Form.Group controlId="verificationCode">
-                <Form.Label>verification code</Form.Label>
-                <Form.Control
-                  type="number"
-                  placeholder="Enter Verification Code sent to email"
-                  name="emailVerification"
-                  value={registerData.emailVerification}
-                  onChange={handleChange}
-                  required
-                ></Form.Control>
-                <Form.Control.Feedback type="invalid">
-                  Please enter a valid code
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Col>
-            <Col md={4}>
               <Form.Group controlId="phoneNumber">
                 <Form.Label>Phone number</Form.Label>
                 <Form.Control
@@ -317,8 +271,7 @@ const Register = () => {
                   pattern="[6789][0-9]{9}"
                 ></Form.Control>
                 <Form.Control.Feedback type="invalid">
-                  Please enter a valid phone number (10 digits) and it should
-                  start from 6, 7, 8, and 9
+                  Please enter a valid phone number (10 digits) starting with 6, 7, 8, or 9.
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -378,11 +331,12 @@ const Register = () => {
                   required
                 ></Form.Control>
                 <Form.Control.Feedback type="invalid">
-                  Please select valid date of birth.
+                  Please select a valid date of birth.
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
           </Row>
+
           <Row className="mb-3">
             <Col md={8}>
               <Form.Group>
@@ -416,6 +370,7 @@ const Register = () => {
               )}
             </Col>
           </Row>
+
           <Row className="mb-3">
             <Col md={9}>
               <Form.Group controlId="address">
@@ -452,6 +407,7 @@ const Register = () => {
               </Form.Group>
             </Col>
           </Row>
+
           <Row className="mb-3">
             <Col md={4}>
               <Form.Group controlId="city">
@@ -469,7 +425,6 @@ const Register = () => {
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
-
             <Col md={4}>
               <Form.Group controlId="state">
                 <Form.Label>State</Form.Label>
@@ -488,7 +443,7 @@ const Register = () => {
             </Col>
             <Col md={4}>
               <Form.Group controlId="country">
-                <Form.Label>country</Form.Label>
+                <Form.Label>Country</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="country"
@@ -503,6 +458,7 @@ const Register = () => {
               </Form.Group>
             </Col>
           </Row>
+
           <Form.Group className="mb-3" controlId="userName">
             <Form.Label>Username</Form.Label>
             <Form.Control
@@ -518,6 +474,7 @@ const Register = () => {
               Please enter a username.
             </Form.Control.Feedback>
           </Form.Group>
+
           <Row className="mb-3">
             <Col>
               <Form.Group controlId="password">
@@ -555,10 +512,11 @@ const Register = () => {
               </Form.Group>
             </Col>
           </Row>
+
           <Row>
             <Col md={6} className="text-center" style={{ lineHeight: "20px" }}>
               <Nav.Link as={NavLink} to={"/login"}>
-                already have an Account?
+                Already have an account?
               </Nav.Link>
             </Col>
             <Col md={6} className="text-center">
